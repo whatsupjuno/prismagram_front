@@ -12,6 +12,30 @@ import Routes from "./Routes";
 import Footer from "./Footer";
 import Header from "./Header";
 
+export default () => {
+  const {
+    data: { isLoggedIn }
+  } = useQuery(QUERY);
+
+  return (
+    <ThemeProvider theme={Theme}>
+      <>
+        <GlobalStyles />
+        <Router>
+          <>
+            {isLoggedIn && <Header />}
+            <Wrapper>
+              <Routes isLoggedIn={isLoggedIn} />
+              <Footer />
+            </Wrapper>
+          </>
+        </Router>
+        <ToastContainer position={toast.POSITION.TOP_RIGHT} />
+      </>
+    </ThemeProvider>
+  );
+};
+
 const Wrapper = styled.div`
   margin: 0 auto;
   max-width: ${props => props.theme.maxWidth};
@@ -24,27 +48,3 @@ const QUERY = gql`
     # @clinet의 뜻은 Query를 client에서 한다는 의미, 없을 경우 API로 보냄
   }
 `;
-
-export default () => {
-  const {
-    data: { isLoggedIn }
-  } = useQuery(QUERY);
-
-  return (
-    <ThemeProvider theme={Theme}>
-      <>
-        <GlobalStyles />
-        <Router>
-          <>
-            <Header />
-            <Wrapper>
-              <Routes isLoggedIn={isLoggedIn} />
-              <Footer />
-            </Wrapper>
-          </>
-        </Router>
-        <ToastContainer position={toast.POSITION.TOP_RIGHT} />
-      </>
-    </ThemeProvider>
-  );
-};

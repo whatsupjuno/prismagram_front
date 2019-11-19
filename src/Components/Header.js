@@ -1,13 +1,64 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
-import { gql } from "apollo-boost";
 import { Compass, HeartEmpty, User, Logo } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
 
+import { ME } from "../SharedQueries";
 import useInput from "../Hooks/useInput";
 import Input from "./Input";
 import Loader from "./Loader";
+
+export default withRouter(({ history }) => {
+  const search = useInput("");
+
+  const { data, loading } = useQuery(ME);
+
+  if (loading) return <Wrapper>{loading && <Loader />}</Wrapper>;
+
+  const onSearchSubmit = e => {
+    e.preventDefault();
+    history.push(`/search?term=${search.value}`);
+  };
+
+  return (
+    <Header>
+      <HeaderWrapper>
+        <HeaderColumn>
+          <Link to="/">
+            <Logo />
+          </Link>
+        </HeaderColumn>
+        <HeaderColumn>
+          <form onSubmit={onSearchSubmit}>
+            <SearchInput
+              value={search.value}
+              onChange={search.onChange}
+              placeholder="Search"
+            />
+          </form>
+        </HeaderColumn>
+        <HeaderColumn>
+          <HeaderLink to="/explore">
+            <Compass />
+          </HeaderLink>
+          <HeaderLink to="/notifications">
+            <HeartEmpty />
+          </HeaderLink>
+          {!data.me ? (
+            <HeaderLink to="/#">
+              <User />
+            </HeaderLink>
+          ) : (
+            <HeaderLink to={data.me.username}>
+              <User />
+            </HeaderLink>
+          )}
+        </HeaderColumn>
+      </HeaderWrapper>
+    </Header>
+  );
+});
 
 const Header = styled.header`
   width: 100%;
@@ -22,6 +73,7 @@ const Header = styled.header`
   justify-content: center;
   align-items: center;
   padding: 25px 0px;
+  z-index: 2;
 `;
 
 const HeaderWrapper = styled.div`
@@ -70,58 +122,3 @@ const Wrapper = styled.div`
   align-items: center;
   min-height: 80vh;
 `;
-
-const ME = gql`
-  {
-    me {
-      username
-    }
-  }
-`;
-
-export default withRouter(({ history }) => {
-  const search = useInput("");
-
-  const { data, loading } = useQuery(ME);
-
-  if (loading) return <Wrapper>{loading && <Loader />}</Wrapper>;
-
-  const onSearchSubmit = e => {
-    e.preventDefault();
-    history.push(`/search?term=${search.value}`);
-  };
-
-  return (
-    <Header>
-      <HeaderWrapper>
-        <HeaderColumn>
-          <Link to="/">
-            <Logo />
-          </Link>
-        </HeaderColumn>
-        <HeaderColumn>
-          <form onSubmit={onSearchSubmit}>
-            <SearchInput {...search} placeholder="Search" />
-          </form>
-        </HeaderColumn>
-        <HeaderColumn>
-          <HeaderLink to="/explore">
-            <Compass />
-          </HeaderLink>
-          <HeaderLink to="/notifications">
-            <HeartEmpty />
-          </HeaderLink>
-          {!data.me ? (
-            <HeaderLink to="/#">
-              <User />
-            </HeaderLink>
-          ) : (
-            <HeaderLink to={data.me.username}>
-              <User />
-            </HeaderLink>
-          )}
-        </HeaderColumn>
-      </HeaderWrapper>
-    </Header>
-  );
-});

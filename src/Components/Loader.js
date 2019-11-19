@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { Logo } from "./Icons";
 
 const Animation = keyframes`
-    0%{
+    /* 0%{
         opacity:0
     }
     50%{
@@ -11,6 +11,12 @@ const Animation = keyframes`
     }
     100%{
         opacity:0;
+    } */
+    from {
+    transform: rotate(0deg);
+    }
+    to {
+    transform: rotate(360deg);
     }
 `;
 
@@ -20,6 +26,6 @@ const Loader = styled.div`
 
 export default () => (
   <Loader>
-    <Logo size={36} />
+    <Logo size={100} />
   </Loader>
 );
