@@ -1,49 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
-import { gql } from "apollo-boost";
-import { useQuery } from "react-apollo-hooks";
 
-import Loader from "../Components/Loader";
-import Post from "../Components/Post";
+import Loader from "../../Components/Loader";
+import Post from "../../Components/Post";
 
-const FEED_QUERY = gql`
-  {
-    seeFeed {
-      id
-      location
-      caption
-      user {
-        id
-        avatar
-        username
-      }
-      files {
-        id
-        url
-      }
-      likeCount
-      isLiked
-      comments {
-        id
-        text
-        user {
-          id
-          username
-        }
-      }
-      createdAt
-    }
-  }
-`;
-
-export default () => {
-  const { data, loading } = useQuery(FEED_QUERY);
-
+const FeedPresenter = ({ data, loading }) => {
   return (
     <Wrapper>
       <Helmet>
-        <title>Feed | Prismagram</title>
+        <title>Feed | Hamgstagram</title>
       </Helmet>
       {loading && <Loader />}
       {!loading &&
@@ -66,6 +32,8 @@ export default () => {
     </Wrapper>
   );
 };
+
+export default FeedPresenter;
 
 const Wrapper = styled.div`
   display: flex;

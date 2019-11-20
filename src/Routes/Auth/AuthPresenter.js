@@ -20,7 +20,7 @@ export default ({
       {action === "logIn" && (
         <>
           <Helmet>
-            <title>Log In | Prismagram</title>
+            <title>Log In | Hamgstagram</title>
           </Helmet>
           <form onSubmit={onSubmit}>
             <Input placeholder={"Email"} {...email} type="email" />

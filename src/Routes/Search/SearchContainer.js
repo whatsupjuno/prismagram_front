@@ -1,7 +1,8 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import SearchPresenter from "./SearchPresenter";
 import { useQuery } from "react-apollo-hooks";
+
+import SearchPresenter from "./SearchPresenter";
 import { SEARCH } from "./SearchQueries";
 
 export default withRouter(({ location: { search } }) => {
