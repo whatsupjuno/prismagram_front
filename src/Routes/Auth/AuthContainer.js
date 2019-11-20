@@ -90,8 +90,6 @@ export default () => {
           const {
             data: { confirmSecret: token }
           } = await confirmSecretMutation();
-
-          console.log(token);
           if (token !== "" && token !== undefined) {
             localLogInMutation({ variables: { token } });
           } else {

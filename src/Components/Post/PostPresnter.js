@@ -58,7 +58,6 @@ export default ({
         <Comments>
           {comments.map(comment => (
             <Comment key={comment.id}>
-              {console.log(comment)}
               <FatText text={comment.user.username} />
               {comment.text}
             </Comment>

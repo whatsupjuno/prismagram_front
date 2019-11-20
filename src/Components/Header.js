@@ -14,7 +14,12 @@ export default withRouter(({ history }) => {
 
   const { data, loading } = useQuery(ME);
 
-  if (loading) return <Wrapper>{loading && <Loader />}</Wrapper>;
+  if (loading)
+    return (
+      <Wrapper>
+        <Loader />
+      </Wrapper>
+    );
 
   const onSearchSubmit = e => {
     e.preventDefault();

@@ -17,14 +17,9 @@ const getSize = size => {
         `;
 };
 
-const Container = styled.div`
-  ${props => getSize(props.size)}
-  background-image:url(${props => props.url});
-  background-size:cover;
-  border-radius:50%;
-`;
-
-const Avatar = ({ size = "sm", url }) => <Container size={size} url={url} />;
+const Avatar = ({ size = "sm", url, className }) => (
+  <Container className={className} size={size} url={url} />
+);
 
 Avatar.propTypes = {
   size: PropTypes.oneOf(["sm", "md", "lg"]),
@@ -32,3 +27,10 @@ Avatar.propTypes = {
 };
 
 export default Avatar;
+
+const Container = styled.div`
+  ${props => getSize(props.size)}
+  background-image:url(${props => props.url});
+  background-size:cover;
+  border-radius:50%;
+`;

@@ -69,13 +69,9 @@ const PostContainer = ({
   const toggleLike = () => {
     toggleLikeMutation();
     if (isLikedState === true) {
-      console.log("isLikedState");
-      console.log(likeCountState);
       setIsLiked(false);
       setLikeCount(likeCountState - 1);
     } else {
-      console.log("Else");
-      console.log(typeof likeCountState);
       setIsLiked(true);
       setLikeCount(likeCountState + 1);
     }

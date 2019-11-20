@@ -2,6 +2,12 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 import { Logo } from "./Icons";
 
+export default () => (
+  <Loader>
+    <Logo size={100} />
+  </Loader>
+);
+
 const Animation = keyframes`
     /* 0%{
         opacity:0
@@ -23,9 +29,3 @@ const Animation = keyframes`
 const Loader = styled.div`
   animation: ${Animation} 1s linear infinite;
 `;
-
-export default () => (
-  <Loader>
-    <Logo size={100} />
-  </Loader>
-);

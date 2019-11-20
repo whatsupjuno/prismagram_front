@@ -5,8 +5,6 @@ export const defaults = {
 export const resolvers = {
   Mutation: {
     logUserIn: (_, { token }, { cache }) => {
-      console.log(token);
-      console.log(cache);
       localStorage.setItem("token", token);
       cache.writeData({
         data: {
