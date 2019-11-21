@@ -7,6 +7,7 @@ import { TOGGLE_LIKE, ADD_COMMENT } from "./PostQueries";
 import useInput from "../../Hooks/useInput";
 import PostPresenter from "./PostPresnter";
 
+//Feed에서 Props를 받아옴
 const PostContainer = ({
   id, //POST id
   user,

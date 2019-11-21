@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Link, withRouter } from "react-router-dom";
-import { Compass, HeartEmpty, User, Logo } from "./Icons";
+import { Compass, HeartEmpty, User, Logo, AddPost } from "./Icons";
 import { useQuery } from "react-apollo-hooks";
 
 import { ME } from "../SharedQueries";
@@ -44,6 +44,9 @@ export default withRouter(({ history }) => {
           </form>
         </HeaderColumn>
         <HeaderColumn>
+          <HeaderLink to="/upload">
+            <AddPost />
+          </HeaderLink>
           <HeaderLink to="/explore">
             <Compass />
           </HeaderLink>

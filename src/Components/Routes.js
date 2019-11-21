@@ -7,6 +7,7 @@ import Feed from "../Routes/Feed";
 import Explore from "../Routes/Explore";
 import Search from "../Routes/Search";
 import Profile from "../Routes/Profile";
+import Upload from "../Routes/Upload";
 
 const LoggedInRoutes = () => (
   <>
@@ -14,6 +15,7 @@ const LoggedInRoutes = () => (
       <Route exact path="/" component={Feed} />
       <Route path="/explore" component={Explore} />
       <Route path="/search" component={Search} />
+      <Route path="/upload" component={Upload} />
       <Route path="/:username" component={Profile} />
       <Redirect from="*" to="/" />
     </Switch>
